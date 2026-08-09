@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#9cc6e0"/><stop offset="100%" stop-color="#e8d4a8"/></linearGradient>
+    <linearGradient id="land" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#9f7a49"/><stop offset="100%" stop-color="#68422a"/></linearGradient>
+  </defs>
+  <rect width="1200" height="720" fill="url(#sky)"/>
+  <path d="M0 470 L190 354 L332 450 L474 304 L634 448 L814 290 L1014 452 L1200 344 L1200 720 L0 720 Z" fill="#7f9880" opacity="0.45"/>
+  <path d="M0 540 C170 500, 274 606, 470 544 S840 442, 1200 560 L1200 720 L0 720 Z" fill="url(#land)"/>
+  <circle cx="180" cy="116" r="68" fill="#fff4c3"/>
+  <text x="84" y="150" font-family="Georgia, serif" font-size="64" fill="#fff">1206</text>
+  <path d="M390 454 C476 356, 566 298, 644 272 C746 240, 834 258, 980 232" stroke="#f7e8bf" stroke-width="8" fill="none" stroke-dasharray="18 16"/>
+  <path d="M406 405 C446 386, 472 382, 512 376 C546 370, 574 340, 602 336 C642 332, 676 356, 706 376 C726 390, 740 414, 776 418 C808 422, 840 410, 870 394" stroke="#5a3222" stroke-width="20" fill="none" stroke-linecap="round"/>
+  <text x="770" y="382" font-size="130">⚑</text>
+  <text x="88" y="214" font-family="Georgia, serif" font-size="28" fill="#fff1d3">Unification and the rise of the Mongol Empire</text>
+</svg>

@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#a2c8e5"/><stop offset="100%" stop-color="#f2dfb2"/></linearGradient>
+  </defs>
+  <rect width="1200" height="720" fill="url(#sky)"/>
+  <circle cx="930" cy="124" r="68" fill="#faedbc"/>
+  <path d="M0 500 C130 460, 280 486, 430 460 S840 440, 1200 474 L1200 720 L0 720 Z" fill="#d0a062"/>
+  <rect x="460" y="256" width="300" height="230" rx="8" fill="#d6b081"/>
+  <polygon points="420,285 798,285 700,200 520,200" fill="#974932"/>
+  <rect x="575" y="366" width="72" height="120" fill="#9a5d3d"/>
+  <rect x="520" y="336" width="26" height="150" fill="#b37f53"/><rect x="674" y="336" width="26" height="150" fill="#b37f53"/>
+  <rect x="255" y="320" width="60" height="165" fill="#c09065"/><polygon points="228,336 342,336 285,252" fill="#ab6243"/>
+  <rect x="892" y="320" width="60" height="165" fill="#c09065"/><polygon points="865,336 979,336 922,252" fill="#ab6243"/>
+  <path d="M132 498 H1080" stroke="#8f6037" stroke-width="8" stroke-dasharray="10 12"/>
+  <text x="104" y="146" font-family="Georgia, serif" font-size="66" fill="#fffdf4">Karakorum</text>
+  <text x="104" y="204" font-family="Georgia, serif" font-size="29" fill="#fff4d7">Cosmopolitan capital of the empire</text>
+</svg>

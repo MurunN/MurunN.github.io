@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#d7ecf2"/><stop offset="100%" stop-color="#f6e9cf"/></linearGradient>
+  </defs>
+  <rect width="1200" height="720" fill="url(#sky)"/>
+  <path d="M0 534 C170 472, 290 562, 430 522 S796 448, 1200 540 L1200 720 L0 720 Z" fill="#d0a66a"/>
+  <circle cx="935" cy="130" r="68" fill="#fff0bc"/>
+  <rect x="170" y="220" width="860" height="280" rx="28" fill="#ffffff" stroke="#c6d8dd" stroke-width="8"/>
+  <rect x="210" y="260" width="780" height="34" rx="17" fill="#dc4a3b"/>
+  <rect x="210" y="312" width="780" height="24" rx="12" fill="#f2c95a"/>
+  <rect x="210" y="352" width="780" height="24" rx="12" fill="#1f6c9c"/>
+  <rect x="210" y="414" width="230" height="34" rx="17" fill="#e8efe7"/>
+  <rect x="462" y="414" width="230" height="34" rx="17" fill="#e8efe7"/>
+  <rect x="714" y="414" width="230" height="34" rx="17" fill="#e8efe7"/>
+  <text x="168" y="160" font-family="Georgia, serif" font-size="66" fill="#2d3f46">1990</text>
+  <text x="168" y="214" font-family="Georgia, serif" font-size="30" fill="#5d7075">Democratic transition and civic voice</text>
+</svg>

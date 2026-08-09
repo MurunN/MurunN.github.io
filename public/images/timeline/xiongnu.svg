@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#22344a"/><stop offset="100%" stop-color="#c27e40"/></linearGradient>
+    <linearGradient id="land" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#b98249"/><stop offset="100%" stop-color="#6d4328"/></linearGradient>
+  </defs>
+  <rect width="1200" height="720" fill="url(#sky)"/>
+  <circle cx="920" cy="120" r="70" fill="#fbe4a4" opacity="0.95"/>
+  <path d="M0 430 L180 350 L330 402 L520 324 L700 398 L880 308 L1020 392 L1200 340 L1200 720 L0 720 Z" fill="#5f675e" opacity="0.55"/>
+  <path d="M0 520 C140 460, 260 560, 420 500 S760 470, 1200 570 L1200 720 L0 720 Z" fill="url(#land)"/>
+  <path d="M170 495 C250 390, 368 374, 436 370 C488 366, 538 340, 614 330 C690 320, 782 350, 872 434" fill="none" stroke="#f0dbb0" stroke-width="7" stroke-dasharray="16 14" opacity="0.75"/>
+  <g fill="#1f2023"><ellipse cx="360" cy="432" rx="80" ry="28"/><rect x="314" y="352" width="16" height="75" rx="8"/><rect x="386" y="352" width="16" height="75" rx="8"/><path d="M282 404 L358 328 L438 404 Z" fill="#3f2a20"/></g>
+  <text x="130" y="145" font-family="Georgia, serif" font-size="68" fill="#fff3dd">Xiongnu</text>
+  <text x="130" y="200" font-family="Georgia, serif" font-size="28" fill="#f7e9cb">Early nomadic statehood across the steppe</text>
+  <text x="930" y="540" font-size="150">🏇</text>
+</svg>
