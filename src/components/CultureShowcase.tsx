@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useMemo, useState } from "react";
 import { AudioGuide } from "@/components/AudioGuide";
@@ -15,6 +16,14 @@ type Hotspot = {
   y: number;
 };
 
+type GerPhoto = {
+  id: string;
+  src: string;
+  title: Record<Language, string>;
+  caption: Record<Language, string>;
+  hotspots: Hotspot[];
+};
+
 type CultureItem = {
   id: string;
   symbol: string;
@@ -28,32 +37,59 @@ type CultureItem = {
   phrases?: { id: string; text: string; meaning: Record<Language, string>; narration: Record<Language, string> }[];
 };
 
+const gerPhotos: GerPhoto[] = [
+  {
+    id: "warm",
+    src: "/images/culture/ger-interior-warm.jpg",
+    title: { mn: "Уламжлалт ахуйтай гэр", en: "Traditional lived-in ger" },
+    caption: {
+      mn: "Тооно, багана, төв зуух, авдар, орны зохион байгуулалтыг бодит орчин дээрээс харуулсан дулаан уур амьсгалтай дотор тал.",
+      en: "A warm interior showing the crown ring, support columns, central stove, storage chest and bed arrangement in a lived-in ger."
+    },
+    hotspots: [
+      { id: "toono", label: { mn: "Тооно", en: "Toono" }, detail: { mn: "Гэрийн оройн дугуй нээлхий. Гэрэл, агаар оруулж, тэнгэртэй холбогдох бэлгэдэл болдог.", en: "The circular crown opening that brings in light and air and symbolically connects the home to the sky." }, x: 50, y: 17 },
+      { id: "bagana", label: { mn: "Багана", en: "Support columns" }, detail: { mn: "Тооноо тулж барьдаг хоёр багана нь гэрийн бүтцийн гол тулгуур хэсэг юм.", en: "The two inner columns support the crown and are among the central structural elements of the ger." }, x: 41, y: 38 },
+      { id: "zuuh", label: { mn: "Зуух, голомт", en: "Stove and hearth" }, detail: { mn: "Дулаан, хоол унд, гэр бүлийн төв амьдралыг илэрхийлэх голомтын орон зай энд байрлана.", en: "This is the hearth area, associated with warmth, cooking and the center of family life." }, x: 47, y: 71 },
+      { id: "or", label: { mn: "Ор, суудал", en: "Bed and seating" }, detail: { mn: "Хананы дагуу ор, суудал байрлуулж, амралт болон зочлох орчныг бүрдүүлдэг.", en: "Beds and seating line the sides of the wall, creating spaces for rest and hospitality." }, x: 74, y: 57 },
+      { id: "avdar", label: { mn: "Авдар, ширээ", en: "Chest and table" }, detail: { mn: "Будмал авдар, намхан ширээ зэрэг тавилга нь ахуй хэрэглээ төдийгүй гоёлын утгатай.", en: "Painted chests and low tables serve practical use while also adding decorative identity." }, x: 66, y: 77 }
+    ]
+  },
+  {
+    id: "wide",
+    src: "/images/culture/ger-interior-wide.jpg",
+    title: { mn: "Цэлгэр зохион байгуулалттай гэр", en: "Wide organized ger interior" },
+    caption: {
+      mn: "Ханын торлог бүтэц, тоононы цагираг, эсгий бүрээс, тавилгын симметр зохион байгуулалтыг өргөн өнцгөөс үзүүлсэн зураг.",
+      en: "A wide-angle view showing the lattice wall, crown ring, felt covering and symmetric furniture arrangement."
+    },
+    hotspots: [
+      { id: "hana", label: { mn: "Хана", en: "Lattice wall" }, detail: { mn: "Эвхэгддэг торлог хана нь гэрийг хурдан буулгаж нүүхэд тохиромжтой, нүүдлийн амьдралын ухаалаг шийдэл юм.", en: "The folding lattice wall makes the ger portable and well suited to nomadic life." }, x: 84, y: 48 },
+      { id: "toono2", label: { mn: "Тооно ба унь", en: "Toono and roof poles" }, detail: { mn: "Тооноос хана руу уньнууд цацран тогтож, гэрийн оройн бүтцийг бүрдүүлнэ.", en: "Roof poles radiate from the crown ring to the wall, shaping the upper structure of the ger." }, x: 51, y: 10 },
+      { id: "haalga", label: { mn: "Хаалга", en: "Door" }, detail: { mn: "Гэрийн хаалга нь ихэвчлэн урд зүг рүү хардаг уламжлалтай бөгөөд орох, гарах ёс журамтай холбоотой.", en: "The door traditionally faces south and is closely tied to etiquette about entering and leaving." }, x: 34, y: 44 },
+      { id: "hoimor", label: { mn: "Хоймор", en: "Honor place" }, detail: { mn: "Гэрийн арын хүндэт хэсэгт гоёлын эдлэл, тахилын зүйлс, эрхэм хүмүүсийн суудал байрладаг.", en: "The rear honor place is associated with valued objects, sacred items and respected guests." }, x: 57, y: 41 },
+      { id: "shirdag", label: { mn: "Ширдэг, эсгий дэвсгэр", en: "Felt carpet" }, detail: { mn: "Ширдэг, эсгий нь дулаан тусгаарлахаас гадна дотоод орон зайн хээ угалзтай гоо зүйг бүрдүүлнэ.", en: "Felt rugs add insulation while contributing pattern and visual harmony to the space." }, x: 53, y: 78 }
+    ]
+  }
+];
+
 const cultureItems: CultureItem[] = [
   {
     id: "ger",
     symbol: "⌂",
     accent: "#9b6033",
-    audioSrc: "/audio/culture/ger-ambience.mp3",
     title: { mn: "Монгол гэр", en: "Mongolian ger" },
     summary: {
-      mn: "Нүүдлийн амьдралд зохицсон, ухаалаг бүтэцтэй сууц.",
-      en: "An intelligently designed home adapted to mobile life on the steppe."
+      mn: "Бодит зураг дээрээс бүтэц, ёс заншил, дотоод зохион байгуулалтыг нь судлах боломжтой нүүдэлчдийн сууц.",
+      en: "A nomadic dwelling explored here through real interior photography, spatial organization and cultural meaning."
     },
     details: {
-      mn: "Монгол гэрийн бүтэц, доторх байрлал бүр ахуй, ёс заншлын утгатай. Тооноос гал голомт хүртэлх хэсгүүд дээр дарж, гэрийн орон зай хэрхэн зохион байгуулагддагийг танилцаарай.",
-      en: "Every part of a ger carries practical and cultural meaning. Explore the crown, hearth, honor place and other interior elements to understand how the space is organized."
+      mn: "Энд иллюстраци биш, бодит Монгол гэрийн дотор талын зураг ашиглав. Зурган дээрх цэгүүдийг дарж тооно, багана, голомт, хоймор, хана зэрэг хэсгүүдийн үүрэг ба бэлгэдлийг танилцаарай.",
+      en: "This section now uses real ger interior photography instead of a simple illustration. Tap the hotspots to learn the role and symbolism of the crown, columns, hearth, honor place, wall and more."
     },
     moments: {
-      mn: ["Тооно, унь, хана бүхий угсардаг бүтэц", "Гал голомтыг төвд байрлуулах зохион байгуулалт", "Зочлох ёс, хүндэтгэлийн байрлал"],
-      en: ["Portable structure of crown, rafters and lattice wall", "A central hearth at the heart of the home", "Spatial customs of hospitality and respect"]
-    },
-    hotspots: [
-      { id: "toono", label: { mn: "Тооно", en: "Toono" }, detail: { mn: "Тооно нь гэрийн оройд байрлах дугуй хийц. Гэрэл, агаар нэвтрүүлэхийн зэрэгцээ тэнгэр өөд нээлттэй байх бэлгэдлийг агуулдаг.", en: "The toono is the circular crown at the top of the ger, admitting light and air while symbolically opening the home to the sky." }, x: 50, y: 18 },
-      { id: "golomt", label: { mn: "Гал голомт", en: "Central hearth" }, detail: { mn: "Гал голомт нь дулаан, хоол ундаа, гэр бүлийн амьдралыг нэгтгэдэг төв цэг. Монгол ахуйд голомтоо хүндэтгэх ёс онцгой байр суурьтай.", en: "The hearth brings together warmth, food and family life. Respect for the household fire holds a special place in Mongolian custom." }, x: 50, y: 63 },
-      { id: "hoimor", label: { mn: "Хоймор", en: "Honor place" }, detail: { mn: "Хоймор бол гэрийн хүндэт байр. Эрхэм зочин суулгах, шүтээн болон үнэ цэнтэй зүйлсээ байрлуулах нь түгээмэл.", en: "The honor place is reserved for respected guests, sacred objects and valued belongings." }, x: 50, y: 33 },
-      { id: "avdar", label: { mn: "Авдар", en: "Chest" }, detail: { mn: "Авдар нь хувцас, эд зүйл хадгалахаас гадна гэрийн дотоод өнгө төрхийг бүрдүүлдэг уламжлалт тавилга.", en: "Painted chests store clothes and valuables while adding color and identity to the interior." }, x: 28, y: 60 },
-      { id: "or", label: { mn: "Ор, суудал", en: "Bed and seating" }, detail: { mn: "Гэрийн хоёр талаар ор, суудал байрлаж амрах, зочлох, өдөр тутмын аж ахуйн хэрэгцээг нэг орон зайд шийддэг.", en: "Beds and seating along the sides support rest, hospitality and everyday household life within one compact space." }, x: 72, y: 60 }
-    ]
+      mn: ["Бодит дотоод орчны гэрэл, тавилгын зохион байгуулалт", "Тооно–уны–хана бүхий нүүдлийн ухаалаг бүтэц", "Ахуй хэрэглээ ба ёс заншил нэг дор огтлолцсон орон зай"],
+      en: ["Real interior light and furniture arrangement", "An efficient nomadic structure of crown, poles and lattice wall", "A space where daily life and custom meet"]
+    }
   },
   {
     id: "music",
@@ -99,15 +135,17 @@ const cultureItems: CultureItem[] = [
   }
 ];
 
-function GerInterior({ language, hotspots }: { language: Language; hotspots: Hotspot[] }) {
-  const [activeHotspot, setActiveHotspot] = useState(hotspots[0]?.id ?? "");
+function GerInterior({ language }: { language: Language }) {
+  const [photoId, setPhotoId] = useState(gerPhotos[0].id);
+  const [activeHotspot, setActiveHotspot] = useState(gerPhotos[0].hotspots[0].id);
   const [foundIds, setFoundIds] = useState<string[]>([]);
-  const selected = hotspots.find((spot) => spot.id === activeHotspot) ?? hotspots[0];
+
+  const activePhoto = gerPhotos.find((photo) => photo.id === photoId) ?? gerPhotos[0];
+  const selected = activePhoto.hotspots.find((spot) => spot.id === activeHotspot) ?? activePhoto.hotspots[0];
 
   useEffect(() => {
-    setActiveHotspot(hotspots[0]?.id ?? "");
-    setFoundIds([]);
-  }, [hotspots]);
+    setActiveHotspot(activePhoto.hotspots[0]?.id ?? "");
+  }, [photoId, activePhoto.hotspots]);
 
   const revealSpot = (id: string) => {
     setActiveHotspot(id);
@@ -115,23 +153,60 @@ function GerInterior({ language, hotspots }: { language: Language; hotspots: Hot
   };
 
   return (
-    <div className="cultureInteractiveStage gerInteractiveStage">
+    <div className="cultureInteractiveStage gerPhotoStage">
       <div className="miniGameHeader">
-        <span>{language === "mn" ? "ГЭРЭЭ ТАНЬЖ МЭДЬЕ" : "EXPLORE THE GER"}</span>
-        <strong>{language === "mn" ? `Нээсэн хэсэг: ${foundIds.length}/${hotspots.length}` : `Discovered: ${foundIds.length}/${hotspots.length}`}</strong>
+        <span>{language === "mn" ? "БОДИТ ГЭРИЙН ДОТООД ОРЧИН" : "REAL GER INTERIOR"}</span>
+        <strong>{language === "mn" ? `Нээсэн цэг: ${foundIds.length}` : `Discovered hotspots: ${foundIds.length}`}</strong>
       </div>
-      <div className="gerVisualFrame">
-        <div className="gerRoofLine" /><div className="gerBackWall" /><div className="gerDoor" /><div className="gerPillar left" /><div className="gerPillar right" /><div className="gerChest left" /><div className="gerChest right" /><div className="gerBed left" /><div className="gerBed right" /><div className="gerShrine" /><div className="gerHearth" />
-        {hotspots.map((spot, index) => (
-          <button key={spot.id} type="button" className={spot.id === activeHotspot ? "cultureHotspot active" : "cultureHotspot"} style={{ left: `${spot.x}%`, top: `${spot.y}%` }} onClick={() => revealSpot(spot.id)}>
-            <span>{index + 1}</span>
+
+      <div className="gerPhotoTabs">
+        {gerPhotos.map((photo) => (
+          <button
+            key={photo.id}
+            type="button"
+            className={photo.id === activePhoto.id ? "gerPhotoTab active" : "gerPhotoTab"}
+            onClick={() => setPhotoId(photo.id)}
+          >
+            <strong>{photo.title[language]}</strong>
+            <span>{photo.caption[language]}</span>
           </button>
         ))}
       </div>
-      <div className="cultureInteractiveInfo">
-        <span>{language === "mn" ? "СОНГОСОН ХЭСЭГ" : "SELECTED AREA"}</span>
-        <strong>{selected.label[language]}</strong>
-        <p>{selected.detail[language]}</p>
+
+      <div className="gerPhotoViewer">
+        <div className="gerPhotoFrame">
+          <Image src={activePhoto.src} alt={activePhoto.title[language]} fill sizes="(max-width: 900px) 100vw, 56vw" className="gerPhotoImage" />
+          <div className="gerPhotoShade" />
+          {activePhoto.hotspots.map((spot) => (
+            <button
+              key={spot.id}
+              type="button"
+              className={spot.id === selected.id ? "cultureHotspot photoHotspot active" : "cultureHotspot photoHotspot"}
+              style={{ left: `${spot.x}%`, top: `${spot.y}%` }}
+              onClick={() => revealSpot(spot.id)}
+            >
+              <span>{spot.label[language].slice(0, 1)}</span>
+            </button>
+          ))}
+        </div>
+
+        <div className="gerPhotoAside">
+          <div className="cultureInteractiveInfo gerInfoCard">
+            <span>{language === "mn" ? "СОНГОСОН ХЭСЭГ" : "SELECTED PART"}</span>
+            <strong>{selected.label[language]}</strong>
+            <p>{selected.detail[language]}</p>
+          </div>
+          <div className="gerQuickFacts">
+            <div>
+              <small>{language === "mn" ? "Зураг" : "View"}</small>
+              <strong>{activePhoto.title[language]}</strong>
+            </div>
+            <div>
+              <small>{language === "mn" ? "Тайлбар" : "Context"}</small>
+              <p>{activePhoto.caption[language]}</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
@@ -174,29 +249,18 @@ function MusicStage({ language }: { language: Language }) {
 
 function ScriptStage({ language, phrases }: { language: Language; phrases: NonNullable<CultureItem["phrases"]> }) {
   const [activePhrase, setActivePhrase] = useState(phrases[0]?.id ?? "");
-  const [seenIds, setSeenIds] = useState<string[]>([]);
   const selected = phrases.find((phrase) => phrase.id === activePhrase) ?? phrases[0];
 
   useEffect(() => {
     setActivePhrase(phrases[0]?.id ?? "");
-    setSeenIds([]);
   }, [phrases]);
 
-  const revealPhrase = (id: string) => {
-    setActivePhrase(id);
-    setSeenIds((prev) => (prev.includes(id) ? prev : [...prev, id]));
-  };
-
   return (
-    <div className="cultureInteractiveStage scriptInteractiveStage">
-      <div className="miniGameHeader">
-        <span>{language === "mn" ? "БИЧГЭЭ НЭЭ" : "SCRIPT EXPLORER"}</span>
-        <strong>{language === "mn" ? `Үзсэн үг: ${seenIds.length}/${phrases.length}` : `Viewed: ${seenIds.length}/${phrases.length}`}</strong>
-      </div>
-      <div className="scriptPillars">
+    <div className="cultureInteractiveStage scriptStage">
+      <div className="scriptPhrases">
         {phrases.map((phrase) => (
-          <button key={phrase.id} type="button" className={phrase.id === activePhrase ? "scriptPillar active" : "scriptPillar"} onClick={() => revealPhrase(phrase.id)}>
-            <span>{phrase.text}</span>
+          <button key={phrase.id} type="button" className={phrase.id === selected.id ? "scriptPhrase active" : "scriptPhrase"} onClick={() => setActivePhrase(phrase.id)}>
+            <strong>{phrase.text}</strong>
             <small>{phrase.meaning[language]}</small>
           </button>
         ))}
@@ -218,16 +282,16 @@ export function CultureShowcase({ language }: { language: Language }) {
     ? {
         kicker: "ӨВ СОЁЛ",
         title: "Өнгөрснөөс өнөөдөрт",
-        body: "Нүүдэлчдийн ахуй, хөгжим, бичгийн соёл өнөөдөр ч амьд хэвээр. Хэсэг бүрийг нээж, бүтэц, дуу авиа, утга бэлгэдлийг нь өөрийн хэмнэлээр судлаарай.",
+        body: "Нүүдэлчдийн ахуй, хөгжим, бичгийн соёл өнөөдөр ч амьд хэвээр. Бодит зураг, бичлэг, сонсголт, тайлбарын хослолоор өв соёлыг илүү нягт мэдэрч судлаарай.",
         moments: "ОНЦЛОХ ОНЦЛОГ",
-        ambience: "Сонсох хэсэг"
+        ambience: "Орчны дуу"
       }
     : {
         kicker: "LIVING HERITAGE",
         title: "From past to present",
-        body: "Nomadic life, music and writing remain living traditions. Explore their structure, sound and meaning at your own pace.",
+        body: "Nomadic life, music and writing remain living traditions. Explore them through real imagery, performance and guided explanation.",
         moments: "KEY FEATURES",
-        ambience: "Listen"
+        ambience: "Ambient sound"
       };
 
   return (
@@ -256,8 +320,8 @@ export function CultureShowcase({ language }: { language: Language }) {
             </div>
             <p className="cultureStoryBody">{active.details[language]}</p>
 
-            {active.audioSrc ? <AudioGuide title={text.ambience} src={active.audioSrc} language={language} narration={{ mn: active.details.mn, en: active.details.en }} /> : null}
-            {active.id === "ger" && active.hotspots ? <GerInterior language={language} hotspots={active.hotspots} /> : null}
+            {active.audioSrc && active.id !== "ger" ? <AudioGuide title={text.ambience} src={active.audioSrc} language={language} narration={{ mn: active.details.mn, en: active.details.en }} narrationSrc={`/audio/narration/culture-${active.id}-mn.mp3`} /> : null}
+            {active.id === "ger" ? <GerInterior language={language} /> : null}
             {active.id === "music" ? <MusicStage language={language} /> : null}
             {active.id === "script" && active.phrases ? <ScriptStage language={language} phrases={active.phrases} /> : null}
 

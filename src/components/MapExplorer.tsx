@@ -270,7 +270,7 @@ export function MapExplorer({ language }: { language: Language }) {
               <span className="detailBadge" style={{ background: `${active.accent}16`, color: active.accent }}>{active.region[language]}</span>
               <h3>{active.title[language]}</h3>
               <p>{active.summary[language]}</p>
-              <AudioGuide title={text.ambience} src={active.audioSrc} language={language} narration={{ mn: active.summary.mn, en: active.summary.en }} compact />
+              <AudioGuide title={text.ambience} src={active.audioSrc} language={language} narration={{ mn: active.summary.mn, en: active.summary.en }} narrationSrc={`/audio/narration/map-${active.id}-mn.mp3`} compact />
               <div className="mapHighlightPanel compactPanel">
                 <span>{text.highlights}</span>
                 <ul>{active.highlights[language].map((item) => <li key={item}>{item}</li>)}</ul>
@@ -291,7 +291,7 @@ export function MapExplorer({ language }: { language: Language }) {
                 <span className="kicker">{modalPlace.region[language]}</span>
                 <h3>{modalPlace.title[language]}</h3>
                 <p>{modalPlace.detail[language]}</p>
-                <AudioGuide title={text.ambience} src={modalPlace.audioSrc} language={language} narration={{ mn: `${modalPlace.summary.mn} ${modalPlace.detail.mn}`, en: `${modalPlace.summary.en} ${modalPlace.detail.en}` }} />
+                <AudioGuide title={text.ambience} src={modalPlace.audioSrc} language={language} narration={{ mn: `${modalPlace.summary.mn} ${modalPlace.detail.mn}`, en: `${modalPlace.summary.en} ${modalPlace.detail.en}` }} narrationSrc={`/audio/narration/map-${modalPlace.id}-detail-mn.mp3`} />
                 <div className="mapRoutePanel immersiveRoutePanel">
                   <span>{text.route}</span>
                   <div className="mapRouteList">

@@ -1,0 +1,11 @@
+SteppeQuest vNext.2 package
+Build date: 2026-08-09
+Includes:
+- Real-photo Mongolian ger explorer with no ger audio panel
+- Real Mongolian MP3 narration pipeline using Google Cloud Gemini-TTS (mn-MN)
+- MP3-first narration with browser mn-MN fallback
+- 2.5D mounted archery: gallop sway, focus, wind, combo, gold targets, timed rounds
+- 2.5D relay courier: 3-lane perspective road, lane changes, jumping, boost, pickups, missions, dawn/day/night stages
+- Improved game audio feedback generated in-browser
+- Museum/public-domain historical figures
+- GitHub Pages workflow without npm-cache lockfile dependency

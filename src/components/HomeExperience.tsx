@@ -9,6 +9,7 @@ import { Reveal } from "@/components/Reveal";
 import { MapExplorer } from "@/components/MapExplorer";
 import { PeopleShowcase } from "@/components/PeopleShowcase";
 import { CultureShowcase } from "@/components/CultureShowcase";
+import { AudioGuide } from "@/components/AudioGuide";
 import type { TimelineItem } from "@/lib/content";
 
 type Language = "mn" | "en";
@@ -131,7 +132,7 @@ const copy = {
     title: "Монголын түүхийг зөвхөн унших биш, мэдэр.",
     text: "Он цагийн хэлхээ, бодит газрын зураг, түүхэн хүмүүсийн өгүүлэмж, өв соёлын дуу дүрсээр Монголын өнгөрсөн үеийг өөрийн хэмнэлээр нээгээрэй.",
     explore: "Түүхийн үеүүдийг үзэх",
-    play: "Бай харваа",
+    play: "Морин харваа",
     years: "жилийн түүх, өв",
     events: "гол түүхэн үе",
     games: "интерактив тоглоом",
@@ -142,14 +143,14 @@ const copy = {
     eraImpact: "ЯАГААД ЧУХАЛ ВЭ",
     eraContext: "ТҮҮХЭН ХОЛБОС",
     gameKicker: "ТҮҮХЭН СОРИЛУУД",
-    gameTitle: "Түүхийг тоглож мэдрэх хоёр мини тоглоом",
-    gameText: "Бай харваанд онох мэдрэмжээ сорьж, Морин элчийн давхилтад бодитоор давхиж, саад даван, захидал цуглуулж өртөөнд хүрээрэй.",
-    archeryTitle: "Бай харваа",
-    archeryText: "Салхи, зай, хүчээ тооцоолж байны төвийг онил. Таван сумаар хамгийн өндөр оноо авахыг зориорой.",
-    archeryButton: "Бай харваа эхлүүлэх",
-    relayTitle: "Морин элчийн давхилт",
-    relayText: "Морьтой давхиж, саад даван, захидал ба өртөөний тамга цуглуулан, тэнхээгээ зөв хуваарилж барианд ор.",
-    relayButton: "Элчийн давхилтыг эхлүүлэх",
+    gameTitle: "Түүхийг илүү бодитоор мэдрэх хоёр тоглоом",
+    gameText: "Морин дээрээс бай харваж, харин элчийн тоглоомд өртөөнөөс өртөө рүү бодит мэт давхиж даалгавраа биелүүлээрэй.",
+    archeryTitle: "Морин харваа",
+    archeryText: "Давхиж явах мэдрэмжтэй орчинд салхи, хүч, хэмнэлээ тооцоолж бай онох морин харвааны сорилд өрсөлдөнө.",
+    archeryButton: "Морин харваа эхлүүлэх",
+    relayTitle: "Их өртөөний элч",
+    relayText: "Даалгавартай өртөөний замд саад давж, захидал, тамга, усны нөөцөө цуглуулан илүү амьд мэдрэмжтэй аяллаар барианд ор.",
+    relayButton: "Өртөөний даалгаврыг эхлүүлэх",
     featureKicker: "ӨӨРИЙН ХЭМНЭЛЭЭР СУДАЛ",
     featureTitle: "Нэг түүхийг олон талаас нь нээ",
     featureText: "Газраас нь эхэлж хүнийг нь тань, хүнээс нь үе рүү шилж, өв соёлыг дуу дүрстэй нь мэдэр. Хэсэг бүр дараагийн түүх рүү хөтөлнө.",
@@ -169,7 +170,7 @@ const copy = {
     title: "Do not just read Mongolian history. Step inside it.",
     text: "Explore Mongolia through a clear timeline, geographically grounded maps, human stories, living heritage, sound, image and interactive games.",
     explore: "Explore the eras",
-    play: "Target archery",
+    play: "Mounted archery",
     years: "years of history and heritage",
     events: "major historical eras",
     games: "interactive games",
@@ -180,14 +181,14 @@ const copy = {
     eraImpact: "WHY IT MATTERS",
     eraContext: "HISTORICAL CONNECTION",
     gameKicker: "LEARN BY PLAYING",
-    gameTitle: "Two mini-games that let you feel the story",
-    gameText: "Test precision in target archery, then ride as a courier, jump over obstacles, gather messages and reach the relay stations in time.",
-    archeryTitle: "Target Archery",
-    archeryText: "Judge wind, distance and power, then try to place five arrows as close to the center as possible.",
-    archeryButton: "Start target archery",
-    relayTitle: "Courier Run",
-    relayText: "Ride, jump, gather message scrolls and relay seals, and manage stamina all the way to the final station.",
-    relayButton: "Start the courier run",
+    gameTitle: "Two upgraded games that let you feel the story",
+    gameText: "Try mounted archery with a more dynamic challenge, then ride as a courier through relay missions with obstacles, supplies and delivery goals.",
+    archeryTitle: "Mounted Archery",
+    archeryText: "Read the wind, timing and power in a more dynamic mounted-archery challenge.",
+    archeryButton: "Start mounted archery",
+    relayTitle: "Relay Courier",
+    relayText: "Ride through relay missions, collect scrolls, seals and water, and manage stamina to reach the final station.",
+    relayButton: "Start the relay mission",
     featureKicker: "EXPLORE YOUR WAY",
     featureTitle: "Read, see, listen and play",
     featureText: "Each section connects with the next: places lead to people, people to eras, and living heritage to sound and interaction.",
@@ -250,7 +251,7 @@ export function HomeExperience({ events }: { events: TimelineItem[] }) {
           <p>{c.text}</p>
           <div className="buttonRow">
             <a className="primaryButton" href="#timeline">{c.explore}</a>
-            <Link className="glassButton" href="/game/archery">{c.play} <span>◎</span></Link>
+            <Link className="glassButton" href="/game/archery">{c.play} <span>➹</span></Link>
           </div>
           <div className="heroStats">
             <div><strong>2,000+</strong><span>{c.years}</span></div>
@@ -291,6 +292,17 @@ export function HomeExperience({ events }: { events: TimelineItem[] }) {
                     <p>{language === "mn" ? active.summaryMn : active.summaryEn}</p>
                   </div>
                 </div>
+
+                <AudioGuide
+                  title={language === "mn" ? "Түүхэн тайлбар" : "Historical narration"}
+                  language={language}
+                  narration={{
+                    mn: `${active.titleMn}. ${active.summaryMn} ${visual.focus.mn}`,
+                    en: `${active.titleEn}. ${active.summaryEn} ${visual.focus.en}`
+                  }}
+                  narrationSrc={`/audio/narration/timeline-${active.id}-mn.mp3`}
+                  compact
+                />
 
                 <div className="timelinePanelGrid">
                   <div className="timelinePanel major">

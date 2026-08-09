@@ -4,12 +4,26 @@ import { useEffect, useMemo, useRef, useState, type ChangeEvent } from "react";
 
 type Language = "mn" | "en";
 
-function speak(text: string, language: Language) {
+function pickVoice(language: Language) {
+  if (typeof window === "undefined" || !("speechSynthesis" in window)) return undefined;
+  const voices = window.speechSynthesis.getVoices();
+  if (language === "mn") {
+    return voices.find((voice) => voice.lang.toLowerCase() === "mn-mn")
+      ?? voices.find((voice) => voice.lang.toLowerCase().startsWith("mn"));
+  }
+  return voices.find((voice) => voice.lang.toLowerCase() === "en-us")
+    ?? voices.find((voice) => voice.lang.toLowerCase().startsWith("en"));
+}
+
+function speakFallback(text: string, language: Language) {
   if (typeof window === "undefined" || !("speechSynthesis" in window)) return;
   window.speechSynthesis.cancel();
   const utterance = new SpeechSynthesisUtterance(text);
   utterance.lang = language === "mn" ? "mn-MN" : "en-US";
-  utterance.rate = 0.95;
+  utterance.rate = language === "mn" ? 0.88 : 0.94;
+  utterance.pitch = 0.96;
+  const voice = pickVoice(language);
+  if (voice) utterance.voice = voice;
   window.speechSynthesis.speak(utterance);
 }
 
@@ -25,16 +39,20 @@ export function AudioGuide({
   src,
   language,
   narration,
+  narrationSrc,
   compact = false
 }: {
   title: string;
   src?: string;
   language: Language;
   narration?: Record<Language, string>;
+  narrationSrc?: string;
   compact?: boolean;
 }) {
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const narrationRef = useRef<HTMLAudioElement | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [narrating, setNarrating] = useState(false);
   const [duration, setDuration] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
 
@@ -63,6 +81,13 @@ export function AudioGuide({
     setIsPlaying(false);
   }, [src]);
 
+  useEffect(() => {
+    return () => {
+      narrationRef.current?.pause();
+      if (typeof window !== "undefined" && "speechSynthesis" in window) window.speechSynthesis.cancel();
+    };
+  }, []);
+
   const progress = useMemo(() => {
     if (!duration) return 0;
     return Math.min(100, (currentTime / duration) * 100);
@@ -84,6 +109,38 @@ export function AudioGuide({
     }
   };
 
+  const playNarration = async () => {
+    if (!narration) return;
+    if (narrating) {
+      narrationRef.current?.pause();
+      if (typeof window !== "undefined" && "speechSynthesis" in window) window.speechSynthesis.cancel();
+      setNarrating(false);
+      return;
+    }
+
+    if (language === "mn" && narrationSrc) {
+      const audio = new Audio(narrationSrc);
+      narrationRef.current = audio;
+      audio.preload = "auto";
+      audio.onended = () => setNarrating(false);
+      audio.onerror = () => {
+        setNarrating(false);
+        speakFallback(narration.mn, "mn");
+      };
+      try {
+        setNarrating(true);
+        await audio.play();
+        return;
+      } catch {
+        setNarrating(false);
+      }
+    }
+
+    speakFallback(narration[language], language);
+    setNarrating(true);
+    window.setTimeout(() => setNarrating(false), Math.max(3500, narration[language].length * 58));
+  };
+
   const onSeek = (event: ChangeEvent<HTMLInputElement>) => {
     const audio = audioRef.current;
     if (!audio || !duration) return;
@@ -97,18 +154,20 @@ export function AudioGuide({
       {src ? <audio ref={audioRef} preload="metadata" src={src} /> : null}
       <div className="audioGuideTop">
         <div>
-          <span>{language === "mn" ? "СОНСОХ" : "LISTEN"}</span>
+          <span>{language === "mn" ? "ДУУ, ТАЙЛБАР" : "AUDIO & NARRATION"}</span>
           <strong>{title}</strong>
         </div>
         <div className="audioGuideActions">
           {src ? (
             <button type="button" className="audioMainButton" onClick={togglePlay}>
-              {isPlaying ? (language === "mn" ? "Түр зогсоох" : "Pause") : (language === "mn" ? "Тоглуулах" : "Play") }
+              {isPlaying ? (language === "mn" ? "Түр зогсоох" : "Pause") : (language === "mn" ? "Орчны дуу" : "Ambient audio")}
             </button>
           ) : null}
           {narration ? (
-            <button type="button" className="audioNarrationButton" onClick={() => speak(narration[language], language)}>
-              {language === "mn" ? "Тайлбар уншуулах" : "Narrate text"}
+            <button type="button" className="audioNarrationButton" onClick={playNarration}>
+              {narrating
+                ? (language === "mn" ? "Тайлбарыг зогсоох" : "Stop narration")
+                : (language === "mn" ? "Монгол тайлбар сонсох" : "Listen to narration")}
             </button>
           ) : null}
         </div>

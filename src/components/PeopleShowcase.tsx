@@ -247,12 +247,26 @@ const people: Person[] = [
   }
 ];
 
-function speak(text: string, language: Language) {
-  if (typeof window === "undefined" || !("speechSynthesis" in window)) return;
+function speak(text: string, language: Language, personId?: string) {
+  if (typeof window === "undefined") return;
+  if (language === "mn" && personId) {
+    const recorded = new Audio(`/audio/narration/person-${personId}-mn.mp3`);
+    recorded.onerror = () => speakBrowser(text, language);
+    recorded.play().catch(() => speakBrowser(text, language));
+    return;
+  }
+  speakBrowser(text, language);
+}
+
+function speakBrowser(text: string, language: Language) {
+  if (!("speechSynthesis" in window)) return;
   window.speechSynthesis.cancel();
   const utterance = new SpeechSynthesisUtterance(text);
   utterance.lang = language === "mn" ? "mn-MN" : "en-US";
-  utterance.rate = 0.95;
+  utterance.rate = language === "mn" ? 0.88 : 0.95;
+  const voices = window.speechSynthesis.getVoices();
+  const voice = language === "mn" ? voices.find((item) => item.lang.toLowerCase().startsWith("mn")) : voices.find((item) => item.lang.toLowerCase().startsWith("en"));
+  if (voice) utterance.voice = voice;
   window.speechSynthesis.speak(utterance);
 }
 
@@ -340,7 +354,7 @@ export function PeopleShowcase({ language }: { language: Language }) {
             </div>
           </div>
           <div className="peopleSpotlightActions">
-            <button className="audioPill" type="button" onClick={() => speak(`${active.name[language]}. ${active.summary[language]}. ${active.story[language]}`, language)}>
+            <button className="audioPill" type="button" onClick={() => speak(`${active.name[language]}. ${active.summary[language]}. ${active.story[language]}`, language, active.id)}>
               🔊 {text.audio}
             </button>
             <button className="storyActionButton" type="button" onClick={() => setModalId(active.id)}>{text.more}</button>

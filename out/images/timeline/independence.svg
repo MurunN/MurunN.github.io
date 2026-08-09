@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#efeadf"/><stop offset="100%" stop-color="#d9bf97"/></linearGradient>
+  </defs>
+  <rect width="1200" height="720" fill="url(#bg)"/>
+  <rect x="190" y="110" width="820" height="500" rx="26" fill="#f7f2e7" stroke="#c1a47a" stroke-width="8"/>
+  <rect x="240" y="164" width="720" height="20" fill="#d4bf9d" opacity="0.65"/>
+  <rect x="240" y="212" width="620" height="14" fill="#dbceb7"/><rect x="240" y="244" width="640" height="14" fill="#dbceb7"/><rect x="240" y="276" width="560" height="14" fill="#dbceb7"/>
+  <rect x="240" y="330" width="200" height="180" fill="#ead8b6" stroke="#c6a277" stroke-width="6"/>
+  <circle cx="674" cy="398" r="88" fill="#b53b32" opacity="0.94"/>
+  <path d="M674 322 v152 M598 398 h152" stroke="#fff4e1" stroke-width="14"/>
+  <text x="512" y="138" font-family="Georgia, serif" font-size="62" fill="#473224">1911</text>
+  <text x="488" y="190" font-family="Georgia, serif" font-size="30" fill="#866748">National revival and independence</text>
+  <text x="262" y="552" font-family="Georgia, serif" font-size="26" fill="#715639">A new state re-emerged in the early twentieth century.</text>
+</svg>
