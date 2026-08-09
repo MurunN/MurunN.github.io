@@ -275,8 +275,8 @@ export function RelayGame() {
       const dt = Math.min(2, (time - lastTimeRef.current) / 16.67);
       lastTimeRef.current = time;
 
-      const horse = horse ?? horses[1];
-      const speed = Math.max(5, 5.7 + horse.speedBonus + stageRef.current * 0.55);
+      const selectedHorse = horse ?? horses[1];
+      const speed = Math.max(5, 5.7 + selectedHorse.speedBonus + stageRef.current * 0.55);
       speedRef.current = speed;
 
       horseVYRef.current += 0.62 * dt;
@@ -422,7 +422,7 @@ export function RelayGame() {
       // horse
       const hx = HORSE_X;
       const hy = GROUND - 32 + horseYRef.current;
-      ctx.fillStyle = horse.color;
+      ctx.fillStyle = selectedHorse.color;
       ctx.fillRect(hx - 18, hy - 26, 62, 26);
       ctx.beginPath();
       ctx.arc(hx + 50, hy - 22, 14, 0, Math.PI * 2);
