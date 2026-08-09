@@ -35,7 +35,37 @@ const assets = [
     title: "Увс нуур",
     author: "Александр Попрыгин",
     license: "CC BY 3.0",
-    href: "https://commons.wikimedia.org/wiki/File:Озеро_Убсу-Нур._Улаангом,_Монголия._-_panoramio_(1).jpg"
+    href: "https://commons.wikimedia.org/wiki/File:%D0%9E%D0%B7%D0%B5%D1%80%D0%BE_%D0%A3%D0%B1%D1%81%D1%83-%D0%9D%D1%83%D1%80._%D0%A3%D0%BB%D0%B0%D0%B0%D0%BD%D0%B3%D0%BE%D0%BC,_%D0%9C%D0%BE%D0%BD%D0%B3%D0%BE%D0%BB%D0%B8%D1%8F._-_panoramio_(1).jpg"
+  },
+  {
+    title: "Чингис хааны хөрөг",
+    author: "Wikimedia Commons / Yuan-era album reproduction",
+    license: "Public domain",
+    href: "https://commons.wikimedia.org/wiki/File:YuanEmperorAlbumGenghisPortrait.jpg"
+  },
+  {
+    title: "Өгэдэй хааны хөрөг",
+    author: "Wikimedia Commons / Yuan Emperor Album",
+    license: "Public domain",
+    href: "https://commons.wikimedia.org/wiki/File:YuanEmperorAlbumOgedeiPortrait.jpg"
+  },
+  {
+    title: "Хубилай хааны хөрөг",
+    author: "Wikimedia Commons / Yuan Emperor Album",
+    license: "Public domain",
+    href: "https://commons.wikimedia.org/wiki/File:YuanEmperorAlbumKhubilaiPortrait.jpg"
+  },
+  {
+    title: "Өндөр гэгээн Занабазарын өөрийн хөрөг",
+    author: "Wikimedia Commons",
+    license: "Public domain / open access",
+    href: "https://commons.wikimedia.org/wiki/File:Zanabanzar_self-portrait.jpg"
+  },
+  {
+    title: "Богд хааны хөрөг",
+    author: "Unknown author; Wikimedia Commons file page",
+    license: "Public domain",
+    href: "https://commons.wikimedia.org/wiki/File:Bogd_Khan_(1).jpg"
   }
 ];
 
@@ -45,7 +75,7 @@ export default function CreditsPage() {
       <section className="creditsHero">
         <span className="kicker">ЭХ СУРВАЛЖ БА ЗУРГИЙН ЭРХ</span>
         <h1>SteppeQuest-д ашигласан нээлттэй эх сурвалжууд</h1>
-        <p>Газрын зураг, гэрэл зургуудын зохиогч болон лицензийн мэдээллийг энд нэг дор тэмдэглэв.</p>
+        <p>Газрын зураг, түүхэн хөрөг, гэрэл зургуудын зохиогч болон лицензийн мэдээллийг энд нэг дор тэмдэглэв.</p>
         <Link href="/">← Нүүр хуудас</Link>
       </section>
       <section className="creditsGrid">
@@ -57,6 +87,10 @@ export default function CreditsPage() {
             <a href={asset.href} target="_blank" rel="noreferrer">Wikimedia Commons →</a>
           </article>
         ))}
+      </section>
+      <section className="creditsMediaNote">
+        <h2>Түүхэн дүрүүдийн зургийн тэмдэглэл</h2>
+        <p>Historical Figures хэсэгт placeholder зураг хэрэглэхгүйгээр museum/public-domain хөрөг, нээлттэй архивын дүрслэлүүдийг ашиглахаар шинэчилсэн. Хэрэв тухайн эх сурвалжийн лиценз эсвэл attribution өөрчлөгдвөл credits хуудсыг мөн адил шинэчилж байх шаардлагатай.</p>
       </section>
       <section className="creditsMediaNote">
         <h2>Хөгжмийн бичлэгүүд</h2>

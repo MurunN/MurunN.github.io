@@ -24,7 +24,7 @@ type TimelineVisual = {
 
 const timelineVisuals: Record<string, TimelineVisual> = {
   "МЭӨ 209": {
-    imageSrc: "/images/timeline/xiongnu.svg",
+    imageSrc: "/images/places/uvs.jpg",
     accent: "#8d5b39",
     chips: {
       mn: ["Эртний төрийн зохион байгуулалт", "Нүүдэлчдийн хүчирхэг холбоо", "Төв Азийн өргөн нөлөө"],
@@ -44,7 +44,7 @@ const timelineVisuals: Record<string, TimelineVisual> = {
     }
   },
   "1206": {
-    imageSrc: "/images/timeline/empire.svg",
+    imageSrc: "/images/places/khentii.jpg",
     accent: "#5f3a29",
     chips: {
       mn: ["Их хуралдай", "Нэгдсэн төр", "Евразийн шинэ эрин"],
@@ -64,7 +64,7 @@ const timelineVisuals: Record<string, TimelineVisual> = {
     }
   },
   "1235": {
-    imageSrc: "/images/timeline/karakorum.svg",
+    imageSrc: "/images/places/karakorum.jpg",
     accent: "#a96340",
     chips: {
       mn: ["Хархорум", "Олон улсын худалдаа", "Өртөөний сүлжээ"],
@@ -84,7 +84,7 @@ const timelineVisuals: Record<string, TimelineVisual> = {
     }
   },
   "1911": {
-    imageSrc: "/images/timeline/independence.svg",
+    imageSrc: "/images/places/altai.jpg",
     accent: "#98533e",
     chips: {
       mn: ["Тусгаар тогтнол", "Богд хаант улс", "Үндэсний сэргэлт"],
@@ -104,7 +104,7 @@ const timelineVisuals: Record<string, TimelineVisual> = {
     }
   },
   "1990": {
-    imageSrc: "/images/timeline/democracy.svg",
+    imageSrc: "/images/places/gobi.jpg",
     accent: "#486d79",
     chips: {
       mn: ["Ардчилал", "Тайван өөрчлөлт", "Шинэ Үндсэн хууль"],
@@ -142,14 +142,14 @@ const copy = {
     eraImpact: "ЯАГААД ЧУХАЛ ВЭ",
     eraContext: "ТҮҮХЭН ХОЛБОС",
     gameKicker: "ТҮҮХЭН СОРИЛУУД",
-    gameTitle: "Түүхийг тоглож таних хоёр зам",
-    gameText: "Бай харваанд төвлөрөл, мэдрэмжээ сорьж, Морин өртөөнд зам, морь, цагийн тооцоог ухаалгаар шийдээрэй.",
+    gameTitle: "Түүхийг тоглож мэдрэх хоёр мини тоглоом",
+    gameText: "Бай харваанд онох мэдрэмжээ сорьж, Морин элчийн давхилтад бодитоор давхиж, саад даван, захидал цуглуулж өртөөнд хүрээрэй.",
     archeryTitle: "Бай харваа",
     archeryText: "Салхи, зай, хүчээ тооцоолж байны төвийг онил. Таван сумаар хамгийн өндөр оноо авахыг зориорой.",
     archeryButton: "Бай харваа эхлүүлэх",
-    relayTitle: "Морин өртөө",
-    relayText: "Элчийн зарлигийг өртөөнөөс өртөө рүү дамжуулахдаа замын эрсдэл, морины тэнхээ, хугацааны дарамтыг зөв удирдаарай.",
-    relayButton: "Морин өртөөнд мордох",
+    relayTitle: "Морин элчийн давхилт",
+    relayText: "Морьтой давхиж, саад даван, захидал ба өртөөний тамга цуглуулан, тэнхээгээ зөв хуваарилж барианд ор.",
+    relayButton: "Элчийн давхилтыг эхлүүлэх",
     featureKicker: "ӨӨРИЙН ХЭМНЭЛЭЭР СУДАЛ",
     featureTitle: "Нэг түүхийг олон талаас нь нээ",
     featureText: "Газраас нь эхэлж хүнийг нь тань, хүнээс нь үе рүү шилж, өв соёлыг дуу дүрстэй нь мэдэр. Хэсэг бүр дараагийн түүх рүү хөтөлнө.",
@@ -157,7 +157,7 @@ const copy = {
       ["◎", "Газрын зураг", "Түүхэн газруудыг бодит байршлаар нь сонгож, зураг ба товч түүхийг нь үзнэ."],
       ["✦", "Түүхэн хүмүүс", "Тухайн хүний амьдрал, шийдвэр, түүхэнд үлдээсэн нөлөөг нэг дороос судална."],
       ["♪", "Өв соёл", "Монгол гэр, морин хуур, хөөмий, монгол бичгийг дуу дүрстэй нь танилцана."],
-      ["🏅", "Миний аялал", "Нэвтэрсэн үед тоглоомын оноо, ахиц, нээсэн тэмдэг тань нэг дор хадгалагдана."]
+      ["🏅", "Миний ахиц", "Тоглоомын шилдэг оноо, нээсэн амжилт, ахиц тань энэ browser дээр хадгалагдана."]
     ],
     cta: "Дараагийн түүхээ өөрөө сонго.",
     ctaText: "Газрын зураг дээрх нэг цэгээс эхэлж, тэндээс хүн, соёл, он цаг руу холбон аялаарай.",
@@ -180,14 +180,14 @@ const copy = {
     eraImpact: "WHY IT MATTERS",
     eraContext: "HISTORICAL CONNECTION",
     gameKicker: "LEARN BY PLAYING",
-    gameTitle: "Two ways to explore through play",
-    gameText: "Test focus and precision in target archery, then manage route, horse and time in the relay adventure.",
+    gameTitle: "Two mini-games that let you feel the story",
+    gameText: "Test precision in target archery, then ride as a courier, jump over obstacles, gather messages and reach the relay stations in time.",
     archeryTitle: "Target Archery",
     archeryText: "Judge wind, distance and power, then try to place five arrows as close to the center as possible.",
     archeryButton: "Start target archery",
-    relayTitle: "Horse Relay",
-    relayText: "Carry an imperial message from one station to the next while managing distance, horse stamina and the pressure of time.",
-    relayButton: "Begin the horse relay",
+    relayTitle: "Courier Run",
+    relayText: "Ride, jump, gather message scrolls and relay seals, and manage stamina all the way to the final station.",
+    relayButton: "Start the courier run",
     featureKicker: "EXPLORE YOUR WAY",
     featureTitle: "Read, see, listen and play",
     featureText: "Each section connects with the next: places lead to people, people to eras, and living heritage to sound and interaction.",
@@ -195,7 +195,7 @@ const copy = {
       ["◎", "Map", "Choose historic places at real geographic positions and open photographs and concise stories."],
       ["✦", "People", "Explore lives, decisions and historical influence through focused profiles."],
       ["♪", "Living heritage", "Discover the ger, morin khuur, throat singing and traditional script through interactive media."],
-      ["🏅", "Progress", "Sign in with Google to save scores, XP and unlocked badges."]
+      ["🏅", "Progress", "Best scores and unlocked achievements are saved in this browser."]
     ],
     cta: "Choose where the next story begins.",
     ctaText: "Start with a place on the map, then follow its connections to people, culture and time.",

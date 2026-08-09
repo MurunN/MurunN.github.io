@@ -1,6 +1,6 @@
 # SteppeQuest — Asset Credits
 
-SteppeQuest uses open-license reference imagery for the historical map and place photography. YouTube performances are embedded with the official YouTube iframe player; the videos are not copied into this project.
+SteppeQuest uses open-license reference imagery for the historical map, place photography, and historical-figure portraits. YouTube performances are embedded with the official YouTube iframe player; the videos are not copied into this project.
 
 ## Map
 
@@ -41,7 +41,36 @@ SteppeQuest uses open-license reference imagery for the historical map and place
   - **Озеро Убсу-Нур. Улаангом, Монголия. - panoramio (1).jpg**
   - Author: Александр Попрыгин
   - License: **CC BY 3.0**
-  - Source: https://commons.wikimedia.org/wiki/File:Озеро_Убсу-Нур._Улаангом,_Монголия._-_panoramio_(1).jpg
+  - Source: https://commons.wikimedia.org/wiki/File:%D0%9E%D0%B7%D0%B5%D1%80%D0%BE_%D0%A3%D0%B1%D1%81%D1%83-%D0%9D%D1%83%D1%80._%D0%A3%D0%BB%D0%B0%D0%B0%D0%BD%D0%B3%D0%BE%D0%BC,_%D0%9C%D0%BE%D0%BD%D0%B3%D0%BE%D0%BB%D0%B8%D1%8F._-_panoramio_(1).jpg
+
+## Historical-figure portraits
+
+These portraits are loaded from open Wikimedia Commons file pages through `Special:FilePath` URLs so the site shows historical figures with real archival or museum-linked imagery instead of placeholder graphics.
+
+- **Chinggis Khaan**
+  - File: `YuanEmperorAlbumGenghisPortrait.jpg`
+  - License: **Public domain**
+  - Source: https://commons.wikimedia.org/wiki/File:YuanEmperorAlbumGenghisPortrait.jpg
+
+- **Ögedei Khan**
+  - File: `YuanEmperorAlbumOgedeiPortrait.jpg`
+  - License: **Public domain**
+  - Source: https://commons.wikimedia.org/wiki/File:YuanEmperorAlbumOgedeiPortrait.jpg
+
+- **Kublai Khan**
+  - File: `YuanEmperorAlbumKhubilaiPortrait.jpg`
+  - License: **Public domain**
+  - Source: https://commons.wikimedia.org/wiki/File:YuanEmperorAlbumKhubilaiPortrait.jpg
+
+- **Zanabazar**
+  - File: `Zanabanzar self-portrait.jpg`
+  - License: **Public domain / open access**
+  - Source: https://commons.wikimedia.org/wiki/File:Zanabanzar_self-portrait.jpg
+
+- **Bogd Khan**
+  - File: `Bogd Khan (1).jpg`
+  - License: **Public domain**
+  - Source: https://commons.wikimedia.org/wiki/File:Bogd_Khan_(1).jpg
 
 ## Embedded performances
 
