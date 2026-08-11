@@ -87,3 +87,7 @@ The project uses YouTube's iframe embed method (`https://www.youtube.com/embed/V
 ## Local ambient audio
 
 The remaining local MP3 files under `public/audio/` are lightweight project ambience/UI audio and **are not presented as archival or authentic field recordings**. Replace them with licensed field recordings or commissioned narration before a public production launch if desired.
+
+## vNext 6 3D game engine
+- Three.js r185 / npm 0.185.1 — MIT License — https://github.com/mrdoob/three.js
+- The vNext 6 horse, rider, road, targets, relay gates, water stops and environment are generated procedurally in project code. No external horse/rider model or game screenshot is embedded in these gameplay scenes.
